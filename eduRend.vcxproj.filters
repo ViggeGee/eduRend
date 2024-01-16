@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
     <Filter Include="Header Files">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
@@ -19,6 +15,10 @@
     </Filter>
     <Filter Include="Libraries">
       <UniqueIdentifier>{381d8b1c-3984-42f0-a7fc-94f3ec529e22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -82,43 +82,43 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\inputhandler.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Resource Files\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\main.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Resource Files\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\objloader.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Resource Files\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\scene.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Resource Files\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\window.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Resource Files\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\vec\mat.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Resource Files\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\vec\vec.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Resource Files\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\texture.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Resource Files\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\shader.c">
-      <Filter>Source Files</Filter>
+      <Filter>Resource Files\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\camera.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Resource Files\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\objmodel.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Resource Files\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\quadmodel.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Resource Files\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="cube.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Resource Files\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -69,10 +69,10 @@ cube::cube(
 	v21.Position = { -0.5, -0.5f, 0.5f };
 	v22.Position = { -0.5, 0.5f, 0.5f };
 	v23.Position = { -0.5, 0.5f, -0.5f };
-	v20.Normal = { 0, 0, 1 };
-	v21.Normal = { 0, 0, 1 };
-	v22.Normal = { 0, 0, 1 };
-	v23.Normal = { 0, 0, 1 };
+	v20.Normal = { 1, 0, 0 };
+	v21.Normal = { 1, 0, 0 };
+	v22.Normal = { 1, 0, 0 };
+	v23.Normal = { 1, 0, 0 };
 	v20.TexCoord = { 0, 0 };
 	v21.TexCoord = { 0, 1 };
 	v22.TexCoord = { 1, 1 };
@@ -95,10 +95,10 @@ cube::cube(
 	v31.Position = { 0.5, -0.5f, 0.5f };
 	v32.Position = { 0.5, 0.5f, 0.5f };
 	v33.Position = { 0.5, 0.5f, -0.5f };
-	v30.Normal = { 0, 0, 1 };
-	v31.Normal = { 0, 0, 1 };
-	v32.Normal = { 0, 0, 1 };
-	v33.Normal = { 0, 0, 1 };
+	v30.Normal = { 1, 0, 0 };
+	v31.Normal = { 1, 0, 0 };
+	v32.Normal = { 1, 0, 0 };
+	v33.Normal = { 1, 0, 0 };
 	v30.TexCoord = { 0, 0 };
 	v31.TexCoord = { 0, 1 };
 	v32.TexCoord = { 1, 1 };
@@ -115,6 +115,58 @@ cube::cube(
 	indices.push_back(13);
 	indices.push_back(15);
 	indices.push_back(14);
+
+	Vertex v40, v41, v42, v43;
+	v40.Position = { -0.5, -0.5f, -0.5f };
+	v41.Position = { -0.5, -0.5f, 0.5f };
+	v42.Position = { 0.5, -0.5f, 0.5f };
+	v43.Position = { 0.5, -0.5f, -0.5f };
+	v40.Normal = { 0, 1, 0 };
+	v41.Normal = { 0, 1, 0 };
+	v42.Normal = { 0, 1, 0 };
+	v43.Normal = { 0, 1, 0 };
+	v40.TexCoord = { 0, 0 };
+	v41.TexCoord = { 0, 1 };
+	v42.TexCoord = { 1, 1 };
+	v43.TexCoord = { 1, 0 };
+	vertices.push_back(v40);
+	vertices.push_back(v41);
+	vertices.push_back(v42);
+	vertices.push_back(v43);
+
+	indices.push_back(16);
+	indices.push_back(19);
+	indices.push_back(17);
+
+	indices.push_back(17);
+	indices.push_back(19);
+	indices.push_back(18);
+
+	Vertex v50, v51, v52, v53;
+	v50.Position = { -0.5, 0.5f, -0.5f };
+	v51.Position = { -0.5, 0.5f, 0.5f };
+	v52.Position = { 0.5, 0.5f, 0.5f };
+	v53.Position = { 0.5, 0.5f, -0.5f };
+	v50.Normal = { 0, 1, 0 };
+	v51.Normal = { 0, 1, 0 };
+	v52.Normal = { 0, 1, 0 };
+	v53.Normal = { 0, 1, 0 };
+	v50.TexCoord = { 0, 0 };
+	v51.TexCoord = { 0, 1 };
+	v52.TexCoord = { 1, 1 };
+	v53.TexCoord = { 1, 0 };
+	vertices.push_back(v50);
+	vertices.push_back(v51);
+	vertices.push_back(v52);
+	vertices.push_back(v53);
+
+	indices.push_back(20);
+	indices.push_back(21);
+	indices.push_back(23);
+
+	indices.push_back(21);
+	indices.push_back(22);
+	indices.push_back(23);
 
 
 	// Vertex array descriptor

@@ -98,6 +98,8 @@ class OurTestScene : public Scene
 	float xRot = 0;
 	float yRot = 0;
 
+	bool loadSponza = true;
+
 	float m_angle = 0;			// A per-frame updated rotation angle (radians)...
 	float m_angular_velocity = fPI / 2;	// ...and its velocity (radians/sec)
 	float m_camera_velocity = 5.0f;	// Camera movement velocity in units/s

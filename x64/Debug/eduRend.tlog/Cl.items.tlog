@@ -1,0 +1,13 @@
+C:\Users\an4211\Desktop\eduRend\cube.cpp;C:\Users\an4211\Desktop\eduRend\x64\Debug\cube.obj
+C:\Users\an4211\Desktop\eduRend\src\camera.cpp;C:\Users\an4211\Desktop\eduRend\x64\Debug\camera.obj
+C:\Users\an4211\Desktop\eduRend\src\inputhandler.cpp;C:\Users\an4211\Desktop\eduRend\x64\Debug\inputhandler.obj
+C:\Users\an4211\Desktop\eduRend\src\main.cpp;C:\Users\an4211\Desktop\eduRend\x64\Debug\main.obj
+C:\Users\an4211\Desktop\eduRend\src\objloader.cpp;C:\Users\an4211\Desktop\eduRend\x64\Debug\objloader.obj
+C:\Users\an4211\Desktop\eduRend\src\objmodel.cpp;C:\Users\an4211\Desktop\eduRend\x64\Debug\objmodel.obj
+C:\Users\an4211\Desktop\eduRend\src\quadmodel.cpp;C:\Users\an4211\Desktop\eduRend\x64\Debug\quadmodel.obj
+C:\Users\an4211\Desktop\eduRend\src\scene.cpp;C:\Users\an4211\Desktop\eduRend\x64\Debug\scene.obj
+C:\Users\an4211\Desktop\eduRend\src\shader.c;C:\Users\an4211\Desktop\eduRend\x64\Debug\shader.obj
+C:\Users\an4211\Desktop\eduRend\src\texture.cpp;C:\Users\an4211\Desktop\eduRend\x64\Debug\texture.obj
+C:\Users\an4211\Desktop\eduRend\src\vec\mat.cpp;C:\Users\an4211\Desktop\eduRend\x64\Debug\mat.obj
+C:\Users\an4211\Desktop\eduRend\src\vec\vec.cpp;C:\Users\an4211\Desktop\eduRend\x64\Debug\vec.obj
+C:\Users\an4211\Desktop\eduRend\src\window.cpp;C:\Users\an4211\Desktop\eduRend\x64\Debug\window.obj

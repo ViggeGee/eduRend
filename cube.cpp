@@ -27,12 +27,11 @@ cube::cube(
 	vertices.push_back(v01);
 	vertices.push_back(v02);
 	vertices.push_back(v03);
-	// Populate the index array with two triangles
-	// Triangle #1
+	
 	indices.push_back(0);
 	indices.push_back(1);
 	indices.push_back(3);
-	// Triangle #2
+	
 	indices.push_back(1);
 	indices.push_back(2);
 	indices.push_back(3);

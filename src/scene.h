@@ -85,6 +85,7 @@ class OurTestScene : public Scene
 	//
 	Camera* m_camera;
 
+	bool loadCube = false;
 	Model* m_quad;
 	Model* m_sponza;
 
@@ -97,9 +98,17 @@ class OurTestScene : public Scene
 	// Misc
 	float xRot = 0;
 	float yRot = 0;
+	//LoadWholeScene
+	bool loadSponza = false;
 
-	bool loadSponza = true;
-
+	//Planets
+	Model* m_sun;
+	mat4f m_sun_transform;
+	Model* m_earth;
+	mat4f m_earth_transform;
+	Model* m_planet;
+	mat4f m_planet_transform;
+	
 	float m_angle = 0;			// A per-frame updated rotation angle (radians)...
 	float m_angular_velocity = fPI / 2;	// ...and its velocity (radians/sec)
 	float m_camera_velocity = 5.0f;	// Camera movement velocity in units/s

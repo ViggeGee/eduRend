@@ -2,7 +2,7 @@
 #include "Scene.h"
 #include "QuadModel.h"
 #include "OBJModel.h"
-#include "C:\Users\victo\OneDrive\Desktop\eduRend-main\cube.h"
+#include "C:\Users\an4211\Desktop\eduRend-main\cube.h"
 
 Scene::Scene(
 	ID3D11Device* dxdevice,
@@ -29,7 +29,7 @@ OurTestScene::OurTestScene(
 	int window_width,
 	int window_height) :
 	Scene(dxdevice, dxdevice_context, window_width, window_height)
-{ 
+{
 	InitTransformationBuffer();
 	// + init other CBuffers
 }
@@ -49,9 +49,14 @@ void OurTestScene::Init()
 	m_camera->MoveTo({ 0, 0, 5 });
 
 	// Create objects
-	m_quad = new cube(m_dxdevice, m_dxdevice_context);
-	if(loadSponza)
-	m_sponza = new OBJModel("assets/crytek-sponza/sponza.obj", m_dxdevice, m_dxdevice_context);
+	if (loadCube)
+		m_quad = new cube(m_dxdevice, m_dxdevice_context);
+	if (loadSponza)
+		m_sponza = new OBJModel("assets/crytek-sponza/sponza.obj", m_dxdevice, m_dxdevice_context);
+
+	m_earth = new OBJModel("assets/sphere/sphere.obj", m_dxdevice, m_dxdevice_context);
+	m_sun = new OBJModel("assets/sphere/sphere.obj", m_dxdevice, m_dxdevice_context);
+	m_planet = new OBJModel("assets/sphere/sphere.obj", m_dxdevice, m_dxdevice_context);
 }
 
 //
@@ -79,10 +84,10 @@ void OurTestScene::Update(
 	yRot += mousedy;
 
 	m_camera->Rotate(0, -xRot, -yRot);
-	
 
 
-		
+
+
 
 	// Now set/update object transformations
 	// This can be done using any sequence of transformation matrices,
@@ -91,19 +96,38 @@ void OurTestScene::Update(
 	// via e.g. Mquad = linalg::mat4f_identity; 
 
 	// Quad model-to-world transformation
-	m_quad_transform = mat4f::translation(0, 0, 0) *			// No translation
-		mat4f::rotation(-m_angle, 0.0f, 1.0f, 0.0f) *	// Rotate continuously around the y-axis
-		mat4f::rotation(-m_angle, 0.0f, 0.0f, 1.0f) *	// Rotate continuously around the y-axis
+	if (loadCube)
+	{
+		m_quad_transform = mat4f::translation(0, 0, 0) *			// No translation
+			mat4f::rotation(-m_angle, 0.0f, 1.0f, 0.0f) *	// Rotate continuously around the y-axis
+			mat4f::rotation(-m_angle, 0.0f, 0.0f, 1.0f) *	// Rotate continuously around the y-axis
 
-		mat4f::scaling(1.5, 1.5, 1.5);				// Scale uniformly to 150%
+			mat4f::scaling(1.5, 1.5, 1.5);				// Scale uniformly to 150%
+
+	}
 
 	if (loadSponza)
 	{
-	// Sponza model-to-world transformation
-	m_sponza_transform = mat4f::translation(0, -5, 0) *		 // Move down 5 units
-		mat4f::rotation(fPI / 2, 0.0f, 1.0f, 0.0f) * // Rotate pi/2 radians (90 degrees) around y
-		mat4f::scaling(0.05f);						 // The scene is quite large so scale it down to 5%
+		// Sponza model-to-world transformation
+		m_sponza_transform = mat4f::translation(0, -5, 0) *		 // Move down 5 units
+			mat4f::rotation(fPI / 2, 0.0f, 1.0f, 0.0f) * // Rotate pi/2 radians (90 degrees) around y
+			mat4f::scaling(0.05f);						 // The scene is quite large so scale it down to 5%
 	}
+
+	m_sun_transform = mat4f::translation(0, 0, 0) *
+		mat4f::rotation(-m_angle, 0.0f, 1.0f, 0.0f) *
+		mat4f::scaling(0.9f);
+
+	m_earth_transform = mat4f::translation(2, 0, 0) *
+		mat4f::rotation(-m_angle, 0.0f, 1.0f, 0.0f) *
+		mat4f::scaling(0.3f);
+
+	m_planet_transform = mat4f::translation(2, 0, 0) *
+		mat4f::rotation(-m_angle, 1.0f, 0.0f, 0.0f) *
+		mat4f::scaling(0.2f);
+
+	m_earth_transform = m_sun_transform * m_earth_transform;
+	m_planet_transform = m_earth_transform * m_planet_transform;
 
 	// Increment the rotation angle.
 	m_angle += m_angular_velocity * dt;
@@ -113,7 +137,7 @@ void OurTestScene::Update(
 	if (m_fps_cooldown < 0.0)
 	{
 		std::cout << "fps " << (int)(1.0f / dt) << std::endl;
-//		printf("fps %i\n", (int)(1.0f / dt));
+		//		printf("fps %i\n", (int)(1.0f / dt));
 		m_fps_cooldown = 2.0;
 	}
 }
@@ -131,23 +155,40 @@ void OurTestScene::Render()
 	m_projection_matrix = m_camera->ProjectionMatrix();
 
 	// Load matrices + the Quad's transformation to the device and render it
-	UpdateTransformationBuffer(m_quad_transform, m_view_matrix, m_projection_matrix);
-	m_quad->Render();
+	if (loadCube)
+	{
+		UpdateTransformationBuffer(m_quad_transform, m_view_matrix, m_projection_matrix);
+		m_quad->Render();
+
+	}
 
 	if (loadSponza)
 	{
-	// Load matrices + Sponza's transformation to the device and render it
-	UpdateTransformationBuffer(m_sponza_transform, m_view_matrix, m_projection_matrix);
-	m_sponza->Render();
+		// Load matrices + Sponza's transformation to the device and render it
+		UpdateTransformationBuffer(m_sponza_transform, m_view_matrix, m_projection_matrix);
+		m_sponza->Render();
 	}
+
+	UpdateTransformationBuffer(m_sun_transform, m_view_matrix, m_projection_matrix);
+	m_sun->Render();
+
+	UpdateTransformationBuffer(m_earth_transform, m_view_matrix, m_projection_matrix);
+	m_earth->Render();
+
+	UpdateTransformationBuffer(m_planet_transform, m_view_matrix, m_projection_matrix);
+	m_planet->Render();
 }
 
 void OurTestScene::Release()
 {
-	SAFE_DELETE(m_quad);
-	if(loadSponza)
-	SAFE_DELETE(m_sponza);
+	if (loadCube)
+		SAFE_DELETE(m_quad);
+	if (loadSponza)
+		SAFE_DELETE(m_sponza);
 	SAFE_DELETE(m_camera);
+	SAFE_DELETE(m_sun);
+	SAFE_DELETE(m_earth);
+	SAFE_DELETE(m_planet);
 
 	SAFE_RELEASE(m_transformation_buffer);
 	// + release other CBuffers

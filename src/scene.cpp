@@ -78,7 +78,7 @@ void OurTestScene::Update(
 	xRot += mousedx;
 	yRot += mousedy;
 
-	m_camera->Rotate(0, xRot, yRot);
+	m_camera->Rotate(0, -xRot, -yRot);
 	
 
 

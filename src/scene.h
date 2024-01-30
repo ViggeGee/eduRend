@@ -70,6 +70,24 @@ protected:
 /**
  * @brief Test scene used in the project.
 */
+// Add this structure definition in Scene.h, if not already present
+struct MaterialBuffer
+{
+	float4 AmbientColor;
+	float4 DiffuseColor;
+	float4 SpecularColor;
+	float Shininess;
+
+	float4 Padding;
+};
+
+// Add this structure definition in Scene.h, if not already present
+struct LightCamBuffer
+{
+	float4 LightPosition;
+	float4 CameraPosition;
+};
+
 class OurTestScene : public Scene
 {
 	//
@@ -85,7 +103,7 @@ class OurTestScene : public Scene
 	//
 	Camera* m_camera;
 
-	bool loadCube = false;
+	bool loadCube = true;
 	Model* m_quad;
 	Model* m_sponza;
 
@@ -99,7 +117,7 @@ class OurTestScene : public Scene
 	float xRot = 0;
 	float yRot = 0;
 	//LoadWholeScene
-	bool loadSponza = false;
+	bool loadSponza = true;
 
 	//Planets
 	Model* m_sun;
@@ -115,8 +133,19 @@ class OurTestScene : public Scene
 	float m_fps_cooldown = 0;
 
 	void InitTransformationBuffer();
+	
+	ID3D11Buffer* m_lightcam_buffer = nullptr;
+	ID3D11Buffer* m_material_buffer = nullptr;
 
+	void UpdateLightCam(vec3f camPos, float4 lightPos);
+	void UpdateMaterialBuffer(float4 ambient, float4 diffuse, float4 specular, float shininess);
+	void InitLightCamBuffer();
+	// Inside the OurTestScene constructor
+// After InitLightCamBuffer() call, add:
+	void InitMaterialBuffer();
 	void UpdateTransformationBuffer(mat4f model_to_world_matrix, mat4f world_to_view_matrix, mat4f projection_matrix);
+
+
 
 public:
 	/**

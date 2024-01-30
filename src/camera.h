@@ -59,6 +59,8 @@ public:
 	 * @note In a performance sensitive situation this matrix should be precomputed if possible
 	*/
 	linalg::mat4f ProjectionMatrix() const noexcept;
+	linalg::mat4f m_rotation;
+	linalg::vec3f GetPosition();
 
 private:
 	// Aperture attributes
@@ -75,7 +77,6 @@ private:
 	float m_far_plane;
 
 	linalg::vec3f m_position;
-	linalg::mat4f m_rotation;
 };
 
 #endif

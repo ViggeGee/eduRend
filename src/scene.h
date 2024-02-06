@@ -103,7 +103,7 @@ class OurTestScene : public Scene
 	//
 	Camera* m_camera;
 
-	bool loadCube = true;
+	bool loadCube = false;
 	Model* m_quad;
 	Model* m_sponza;
 

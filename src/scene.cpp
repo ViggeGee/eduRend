@@ -160,7 +160,7 @@ void OurTestScene::Render()
 	m_view_matrix = m_camera->WorldToViewMatrix();
 	m_projection_matrix = m_camera->ProjectionMatrix();
 	UpdateLightCam(m_camera->GetPosition(), m_view_matrix * float4(0.0f,0.0f,-1.0f,0.0f));
-	UpdateMaterialBuffer(float4(100,200,100,1), float4(65,150,70,0.0f), float4(150,150,150, 0.0f), 10.0f);
+	UpdateMaterialBuffer(float4(150, 100, 150,1), float4(150, 100, 150,0.0f), float4(150,150,150, 0.0f), 10.0f);
 	
 	
 	// Load matrices + the Quad's transformation to the device and render it
@@ -180,12 +180,16 @@ void OurTestScene::Render()
 	}
 
 	UpdateTransformationBuffer(m_sun_transform, m_view_matrix, m_projection_matrix);
+	UpdateMaterialBuffer(float4(255, 255, 0, 1), float4(255, 255, 0, 0.0f), float4(150, 150, 150, 0.0f), 10.0f);
 	m_sun->Render();
 
+
 	UpdateTransformationBuffer(m_earth_transform, m_view_matrix, m_projection_matrix);
-	m_earth->Render();
+	UpdateMaterialBuffer(float4(100, 200, 100, 1), float4(65, 150, 70, 0.0f), float4(150, 150, 150, 0.0f), 10.0f);
+	m_earth->Render();	
 
 	UpdateTransformationBuffer(m_planet_transform, m_view_matrix, m_projection_matrix);
+	UpdateMaterialBuffer(float4(150, 150, 150, 1), float4(150, 150, 150, 0.0f), float4(150, 150, 150, 0.0f), 10.0f);
 	m_planet->Render();
 }
 

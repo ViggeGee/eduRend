@@ -71,15 +71,15 @@ protected:
  * @brief Test scene used in the project.
 */
 // Add this structure definition in Scene.h, if not already present
-struct MaterialBuffer
-{
-	float4 AmbientColor;
-	float4 DiffuseColor;
-	float4 SpecularColor;
-	float Shininess;
-
-	float4 Padding;
-};
+//struct MaterialBuffer
+//{
+//	float4 AmbientColor;
+//	float4 DiffuseColor;
+//	float4 SpecularColor;
+//	float Shininess;
+//
+//	float4 Padding;
+//};
 
 // Add this structure definition in Scene.h, if not already present
 struct LightCamBuffer
@@ -103,7 +103,7 @@ class OurTestScene : public Scene
 	//
 	Camera* m_camera;
 
-	bool loadCube = false;
+	bool loadCube = true;
 	Model* m_quad;
 	Model* m_sponza;
 
@@ -136,7 +136,10 @@ class OurTestScene : public Scene
 	
 	ID3D11Buffer* m_lightcam_buffer = nullptr;
 	ID3D11Buffer* m_material_buffer = nullptr;
-
+	ID3D11SamplerState* sampler;
+	D3D11_SAMPLER_DESC samplerdesc;
+	// + init other CBuffers
+	void InitSampler(ID3D11Device* dxdevice, ID3D11DeviceContext* dxdevice_context);
 	void UpdateLightCam(vec3f camPos, float4 lightPos);
 	void UpdateMaterialBuffer(float4 ambient, float4 diffuse, float4 specular, float shininess);
 	void InitLightCamBuffer();

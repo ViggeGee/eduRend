@@ -138,15 +138,15 @@ void OBJLoader::LoadMaterials(
         }
         else if (sscanf_s(line.c_str(), "Ka %f %f %f", &a, &b, &c) == 3)
         {
-            current_mtl->AmbientColour = vec3f(a, b, c);
+            current_mtl->AmbientColour = vec4f(a, b, c,0); //nollan la jag till :o
         }
         else if (sscanf_s(line.c_str(), "Kd %f %f %f", &a, &b, &c) == 3)
         {
-            current_mtl->DiffuseColour = vec3f(a, b, c);
+            current_mtl->DiffuseColour = vec4f(a, b, c,0); //nollan la jag till :o
         }
         else if (sscanf_s(line.c_str(), "Ks %f %f %f", &a, &b, &c) == 3)
         {
-            current_mtl->SpecularColour = vec3f(a, b, c);
+            current_mtl->SpecularColour = vec4f(a, b, c,0); //nollan la jag till :o
         }
     }
     in.close();

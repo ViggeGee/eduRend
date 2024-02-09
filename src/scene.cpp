@@ -33,7 +33,7 @@ OurTestScene::OurTestScene(
 	InitTransformationBuffer();
 	InitLightCamBuffer();
 	InitMaterialBuffer();
-	// + init other CBuffers
+	InitSampler(dxdevice, dxdevice_context);
 }
 
 //
@@ -206,6 +206,7 @@ void OurTestScene::Release()
 	SAFE_RELEASE(m_lightcam_buffer);
 	SAFE_RELEASE(m_material_buffer);
 	SAFE_RELEASE(m_transformation_buffer);
+	SAFE_RELEASE(sampler);
 	// + release other CBuffers
 }
 
@@ -244,7 +245,7 @@ void OurTestScene::InitMaterialBuffer()
 	D3D11_BUFFER_DESC materialBufferDesc = { 0 };
 	materialBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
 	/*materialBufferDesc.ByteWidth = sizeof(MaterialBuffer);*/
-	materialBufferDesc.ByteWidth = ((sizeof(MaterialBuffer) + 15) / 16) * 16;  // Round up to the nearest multiple of 16
+	materialBufferDesc.ByteWidth = ((sizeof(Material) + 15) / 16) * 16;  // Round up to the nearest multiple of 16
 
 	materialBufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 	materialBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
@@ -253,14 +254,38 @@ void OurTestScene::InitMaterialBuffer()
 	ASSERT(hr = m_dxdevice->CreateBuffer(&materialBufferDesc, nullptr, &m_material_buffer));
 }
 
+void OurTestScene::InitSampler(ID3D11Device* dxdevice, ID3D11DeviceContext* dxdevice_context)
+{
+	samplerdesc =
+	{
+	D3D11_FILTER_MIN_MAG_MIP_LINEAR, // Filter
+	D3D11_TEXTURE_ADDRESS_CLAMP, // AddressU
+	D3D11_TEXTURE_ADDRESS_CLAMP, // AddressV
+	D3D11_TEXTURE_ADDRESS_CLAMP, // AddressW
+	0.0f, // MipLODBias
+	1, // MaxAnisotropy
+	D3D11_COMPARISON_NEVER, // ComapirsonFunc
+	{ 1.0f, 1.0f, 1.0f, 1.0f }, // BorderColor
+	-FLT_MAX, // MinLOD
+	FLT_MAX, // MaxLOD
+	};
+	dxdevice->CreateSamplerState(&samplerdesc, &sampler);
+
+	dxdevice_context->PSSetSamplers(
+		0, // slot #
+		1, // number of samplers to bind (1)
+		&sampler);
+
+}
+
 void OurTestScene::UpdateMaterialBuffer(float4 ambient, float4 diffuse, float4 specular, float shininess)
 {
 	D3D11_MAPPED_SUBRESOURCE resource;
 	m_dxdevice_context->Map(m_material_buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &resource);
-	MaterialBuffer* matrixBuffer = (MaterialBuffer*)resource.pData;
-	matrixBuffer->AmbientColor = ambient;
-	matrixBuffer->DiffuseColor = diffuse;
-	matrixBuffer->SpecularColor = specular;
+	Material* matrixBuffer = (Material*)resource.pData;
+	matrixBuffer->AmbientColour = ambient;
+	matrixBuffer->DiffuseColour = diffuse;
+	matrixBuffer->SpecularColour = specular;
 	matrixBuffer->Shininess = shininess;
 	m_dxdevice_context->Unmap(m_material_buffer, 0);
 }
